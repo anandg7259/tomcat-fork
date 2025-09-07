@@ -14,7 +14,7 @@ STEP1: Downloading 10.0.8 version of Apache Tomcat.
 	STEP1_c: Move the extracted files to the installation directory.
 		     sudo mv apache-tomcat-10.0.8/* /opt/tomcat/
 	STEP1_d: Change ownership of the installation directory.
-		     sudo chown -R www-data:www-data /opt/tomcat/
+		     sudo chown -R www-data:www-data /opt/tomcat/      //replace it with tomcat:tomcat    // before you should create the tomcat user and group
 	STEP1_e: Change access permissions for the installation directory.
 		     sudo chmod -R 755 /opt/tomcat/
     STEP1_f: Create a systemd unit file for Apache Tomcat to run it as a system.service. /etc/systemd/system/tomcat.service
@@ -26,7 +26,7 @@ STEP1: Downloading 10.0.8 version of Apache Tomcat.
         Type=forking
         User=root
         Group=root
-        Environment="JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+        Environment="JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64"     // replace it with current java version
         Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom"
         Environment="CATALINA_BASE=/opt/tomcat"
         Environment="CATALINA_HOME=/opt/tomcat"
@@ -41,7 +41,7 @@ STEP1: Downloading 10.0.8 version of Apache Tomcat.
 
 STEP2: Configure administrator and manager user account for Apache Tomcat.
 	     echo ' Edit the tomcat-users.xml file and add below users config lines
-		 sudo vi /opt/tomcat/conf/tomcat-users.xml
+		 sudo vi /opt/tomcat/conf/tomcat-users.xml      // add below lines to that file
 	
 		  <role rolename="manager-gui" />
 		  <user username="manager" password="StrongPassword" roles="manager-gui,manager-script" />
@@ -52,7 +52,7 @@ STEP2: Configure administrator and manager user account for Apache Tomcat.
 STEP3: Enable remote access to Apache Tomcat by editing manager and host-manager configuration files.
 	
 		1. sudo vi /opt/tomcat/webapps/manager/META-INF/context.xml
-		 	Note: Comment out the IP addresses section as shown below.
+		 	Note: Comment out the IP addresses section as shown below.    // replace the lines in the file with below lines
 
 		<!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"
          allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
